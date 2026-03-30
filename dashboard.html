@@ -23,21 +23,21 @@
       <span class="sidebar-name">FamilyFinance</span>
     </div>
     <div class="sidebar-family">
-      <div class="sidebar-family-label">Family</div>
+      <div class="sidebar-family-label" data-t="family">Family</div>
       <div class="sidebar-family-name" id="sb-family-name">Loading...</div>
-      <span class="sidebar-invite" id="sb-invite-btn" onclick="showInviteModal()" style="display:none">+ Invite members</span>
+      <span class="sidebar-invite" id="sb-invite-btn" onclick="showInviteModal()" style="display:none" data-t="inviteMembers">+ Invite members</span>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-section-label">Main</div>
-      <button class="nav-item active" onclick="navTo('overview')"><span class="nav-icon">📊</span> Overview</button>
-      <button class="nav-item" onclick="navTo('transactions')"><span class="nav-icon">💳</span> Transactions</button>
-      <button class="nav-item" onclick="navTo('goals')"><span class="nav-icon">🎯</span> Goals</button>
-      <div class="nav-section-label" style="margin-top:8px">Family</div>
-      <button class="nav-item" onclick="navTo('family')"><span class="nav-icon">👨‍👩‍👧</span> Members</button>
-      <button class="nav-item" id="nav-alerts" onclick="navTo('alerts')"><span class="nav-icon">🔔</span> Alerts <span id="alert-badge" class="nav-badge" style="display:none">0</span></button>
-      <div class="nav-section-label" style="margin-top:8px" id="admin-section" style="display:none">Admin</div>
-      <button class="nav-item" id="nav-settings" onclick="navTo('settings')" style="display:none"><span class="nav-icon">⚙️</span> Settings</button>
-      <button class="nav-item" id="nav-superadmin" onclick="navTo('superadmin')" style="display:none"><span class="nav-icon">🛡️</span> Super Admin</button>
+      <div class="nav-section-label" data-t="mainNav">Main</div>
+      <button class="nav-item active" onclick="navTo('overview')"><span class="nav-icon">📊</span> <span data-t="overview">Overview</span></button>
+      <button class="nav-item" onclick="navTo('transactions')"><span class="nav-icon">💳</span> <span data-t="transactions">Transactions</span></button>
+      <button class="nav-item" onclick="navTo('goals')"><span class="nav-icon">🎯</span> <span data-t="goals">Goals</span></button>
+      <div class="nav-section-label" style="margin-top:8px" data-t="familyNav">Family</div>
+      <button class="nav-item" onclick="navTo('family')"><span class="nav-icon">👨‍👩‍👧</span> <span data-t="family">Members</span></button>
+      <button class="nav-item" id="nav-alerts" onclick="navTo('alerts')"><span class="nav-icon">🔔</span> <span data-t="alerts">Alerts</span> <span id="alert-badge" class="nav-badge" style="display:none">0</span></button>
+      <div class="nav-section-label" style="margin-top:8px">Admin</div>
+      <button class="nav-item" id="nav-settings" onclick="navTo('settings')" style="display:none"><span class="nav-icon">⚙️</span> <span data-t="settings">Settings</span></button>
+      <button class="nav-item" id="nav-superadmin" onclick="navTo('superadmin')" style="display:none"><span class="nav-icon">🛡️</span> <span data-t="superadmin">Super Admin</span></button>
     </nav>
     <div class="sidebar-user">
       <div class="user-avatar" id="sb-avatar" style="background:#e8f0fe;color:#1a56db;">?</div>
@@ -55,7 +55,7 @@
       <button class="btn btn-ghost mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
       <span class="topbar-title" id="topbar-title">Overview</span>
       <div class="topbar-actions">
-        <button class="btn btn-primary" id="add-tx-btn" onclick="openModal('tx')" style="display:none">+ Add Transaction</button>
+        <button class="btn btn-primary" id="add-tx-btn" onclick="openModal('tx')" style="display:none" data-t="addTransaction">+ Add Transaction</button>
       </div>
     </header>
 
@@ -64,17 +64,17 @@
       <div class="metrics-grid" id="overview-metrics"></div>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">This month</div>
+          <div class="card-title" data-t="thisMonth">This month</div>
           <div class="chart-wrap" style="height:220px"><canvas id="monthChart"></canvas></div>
         </div>
         <div class="card">
-          <div class="card-title">Spending breakdown</div>
+          <div class="card-title" data-t="spendingBreakdown">Spending breakdown</div>
           <div id="donut-legend" class="chart-legend"></div>
           <div class="chart-wrap" style="height:180px"><canvas id="donutChart"></canvas></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Recent family activity</div>
+        <div class="card-title" data-t="recentActivity">Recent family activity</div>
         <div id="recent-activity"></div>
       </div>
     </div>
@@ -83,11 +83,11 @@
     <div class="page" id="page-transactions">
       <div class="grid-2" style="margin-bottom:1.25rem">
         <div class="card">
-          <div class="card-title">Family transactions</div>
+          <div class="card-title" data-t="familyTx">Family transactions</div>
           <div id="tx-list-family"></div>
         </div>
         <div class="card">
-          <div class="card-title">My private transactions</div>
+          <div class="card-title" data-t="privateTx">My private transactions</div>
           <div id="tx-list-private"></div>
         </div>
       </div>
@@ -96,20 +96,20 @@
     <!-- GOALS PAGE -->
     <div class="page" id="page-goals">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-        <div style="font-size:16px;font-weight:500">Savings Goals</div>
-        <button class="btn btn-primary" onclick="openModal('goal')">+ New Goal</button>
+        <div style="font-size:16px;font-weight:500" data-t="savingsGoals">Savings Goals</div>
+        <button class="btn btn-primary" onclick="openModal('goal')" data-t="newGoal">+ New Goal</button>
       </div>
       <div id="goals-list"></div>
     </div>
 
     <!-- FAMILY PAGE -->
     <div class="page" id="page-family">
-      <div class="card" style="margin-bottom:1.25rem" id="invite-card" style="display:none">
-        <div class="card-title">Invite link</div>
+      <div class="card" style="margin-bottom:1.25rem" id="invite-card">
+        <div class="card-title" data-t="inviteLink">Invite link</div>
         <div id="invite-display"></div>
       </div>
       <div class="card">
-        <div class="card-title">Family members</div>
+        <div class="card-title" data-t="familyMembers">Family members</div>
         <div id="members-list"></div>
       </div>
     </div>
@@ -118,8 +118,8 @@
     <div class="page" id="page-alerts">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-          <div style="font-size:16px;font-weight:500">Family Alerts</div>
-          <button class="btn btn-ghost" onclick="markAllRead()" style="font-size:12px">Mark all read</button>
+          <div style="font-size:16px;font-weight:500" data-t="familyAlerts">Family Alerts</div>
+          <button class="btn btn-ghost" onclick="markAllRead()" style="font-size:12px" data-t="markAllRead">Mark all read</button>
         </div>
         <div id="alerts-list"></div>
       </div>
@@ -127,34 +127,27 @@
 
     <!-- SUPER ADMIN PAGE -->
     <div class="page" id="page-superadmin">
-      <!-- Password Gate -->
       <div id="sa-gate">
         <div style="max-width:380px;margin:4rem auto">
           <div class="card" style="text-align:center;padding:2.5rem">
             <div style="font-size:40px;margin-bottom:1rem">🛡️</div>
             <div style="font-size:20px;font-weight:600;margin-bottom:6px">Super Admin Access</div>
-            <div style="font-size:13px;color:#6b7280;margin-bottom:1.5rem">Enter the admin password to continue</div>
-            <input type="password" id="sa-password" placeholder="Admin password" style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:14px;margin-bottom:10px;outline:none" onkeydown="if(event.key==='Enter')checkAdminPass()" />
+            <div style="font-size:13px;color:var(--text-muted);margin-bottom:1.5rem">Enter the admin password to continue</div>
+            <input type="password" id="sa-password" placeholder="Admin password" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:10px;outline:none;background:var(--card-bg);color:var(--text)" onkeydown="if(event.key==='Enter')checkAdminPass()" />
             <div id="sa-error" style="color:#dc2626;font-size:12px;margin-bottom:8px;display:none">Incorrect password</div>
             <button class="btn btn-primary" style="width:100%" onclick="checkAdminPass()">Unlock Dashboard</button>
           </div>
         </div>
       </div>
-
-      <!-- Admin Dashboard (hidden until unlocked) -->
       <div id="sa-content" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
           <div>
             <div style="font-size:20px;font-weight:600">🛡️ Super Admin Panel</div>
-            <div style="font-size:13px;color:#6b7280;margin-top:2px">Full platform overview — all users, families & transactions</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:2px">Full platform overview — all users, families & transactions</div>
           </div>
           <button class="btn btn-ghost" onclick="refreshAdminData()" style="font-size:13px">↻ Refresh</button>
         </div>
-
-        <!-- Top metrics -->
         <div class="metrics-grid" id="sa-metrics" style="margin-bottom:1.5rem"></div>
-
-        <!-- Charts row -->
         <div class="grid-2" style="margin-bottom:1.5rem">
           <div class="card">
             <div class="card-title">User growth (last 7 days)</div>
@@ -165,8 +158,6 @@
             <div class="chart-wrap" style="height:200px"><canvas id="sa-tx-chart"></canvas></div>
           </div>
         </div>
-
-        <!-- All families -->
         <div class="grid-2" style="margin-bottom:1.5rem">
           <div class="card">
             <div class="card-title">All families <span style="font-size:11px;color:var(--text-muted);font-weight:400">(click to view details)</span></div>
@@ -184,17 +175,15 @@
             <div id="sa-active-members"></div>
           </div>
         </div>
-
-        <!-- All users table -->
         <div class="card" style="margin-bottom:1.5rem">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
             <div class="card-title" style="margin-bottom:0">All users</div>
-            <input type="text" id="sa-search" placeholder="Search users..." oninput="filterUsers()" style="padding:6px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;width:200px;outline:none" />
+            <input type="text" id="sa-search" placeholder="Search users..." oninput="filterUsers()" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;width:200px;outline:none;background:var(--card-bg);color:var(--text)" />
           </div>
           <div style="overflow-x:auto">
             <table style="width:100%;border-collapse:collapse;font-size:13px" id="sa-users-table">
               <thead>
-                <tr style="border-bottom:1px solid #e5e7eb;color:#6b7280">
+                <tr style="border-bottom:1px solid var(--border);color:var(--text-muted)">
                   <th style="text-align:left;padding:8px 10px;font-weight:500">Name</th>
                   <th style="text-align:left;padding:8px 10px;font-weight:500">Email</th>
                   <th style="text-align:left;padding:8px 10px;font-weight:500">Role</th>
@@ -207,8 +196,6 @@
             </table>
           </div>
         </div>
-
-        <!-- Recent transactions across ALL families -->
         <div class="card">
           <div class="card-title">Recent transactions (all families)</div>
           <div id="sa-all-tx"></div>
@@ -218,11 +205,8 @@
 
     <!-- SETTINGS PAGE -->
     <div class="page" id="page-settings">
-      <!-- Appearance & Preferences -->
       <div class="card" style="margin-bottom:1.25rem">
         <div class="card-title" data-t="appearanceSettings">Appearance & Language</div>
-
-        <!-- Theme Toggle -->
         <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
           <div>
             <div style="font-size:14px;font-weight:500;color:var(--text)" data-t="theme">Theme</div>
@@ -233,43 +217,35 @@
             <button class="theme-btn" id="theme-dark" onclick="setTheme('dark')">🌙 <span data-t="darkMode">Dark</span></button>
           </div>
         </div>
-
-        <!-- Language -->
         <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
           <div>
             <div style="font-size:14px;font-weight:500;color:var(--text)" data-t="language">Language</div>
-            <div style="font-size:12px;color:var(--text-muted)">Changes all text in the app</div>
+            <div style="font-size:12px;color:var(--text-muted)">Changes all text across the entire app</div>
           </div>
           <select id="lang-select" onchange="setLanguage(this.value)" style="padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--card-bg);color:var(--text)"></select>
         </div>
-
-        <!-- Currency -->
         <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
           <div>
             <div style="font-size:14px;font-weight:500;color:var(--text)" data-t="currency">Currency</div>
-            <div style="font-size:12px;color:var(--text-muted)">Changes how amounts are displayed</div>
+            <div style="font-size:12px;color:var(--text-muted)">Changes all amounts across the entire app</div>
           </div>
           <select id="currency-select" onchange="setCurrency(this.value)" style="padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--card-bg);color:var(--text)"></select>
         </div>
       </div>
-
-      <!-- Custom Categories -->
       <div class="card" style="margin-bottom:1.25rem">
         <div class="card-title" data-t="customCategories">Custom Categories</div>
         <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap">
           <input type="text" id="new-cat-icon" placeholder="😀" maxlength="2" style="width:54px;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:18px;text-align:center;background:var(--card-bg);color:var(--text)" />
-          <input type="text" id="new-cat-name" placeholder="Category name" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--card-bg);color:var(--text)" />
-          <button class="btn btn-primary" onclick="addCustomCategory()">+ Add</button>
+          <input type="text" id="new-cat-name" data-t-placeholder="categoryName" placeholder="Category name" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--card-bg);color:var(--text)" />
+          <button class="btn btn-primary" onclick="addCustomCategory()" data-t="addCategory">+ Add</button>
         </div>
         <div id="custom-cats-list"></div>
       </div>
-
-      <!-- Family Settings -->
       <div class="card" style="margin-bottom:1.25rem">
         <div class="card-title" data-t="familySettings">Family settings</div>
         <div class="modal-field">
           <label data-t="familyName">Family name</label>
-          <input type="text" id="settings-family-name" placeholder="Family name" />
+          <input type="text" id="settings-family-name" data-t-placeholder="familyName" placeholder="Family name" />
         </div>
         <div class="modal-field">
           <label data-t="monthlyBudget">Monthly budget</label>
@@ -277,8 +253,6 @@
         </div>
         <button class="btn btn-primary" onclick="saveSettings()" data-t="saveSettings">Save Settings</button>
       </div>
-
-      <!-- Manage Members -->
       <div class="card">
         <div class="card-title" data-t="manageMembers">Manage members</div>
         <div id="settings-members"></div>
@@ -291,39 +265,35 @@
 <div class="modal-overlay" id="modal-tx" style="display:none" onclick="if(event.target===this)closeModal('tx')">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">Add Transaction</span>
+      <span class="modal-title" data-t="addTx">Add Transaction</span>
       <button class="modal-close" onclick="closeModal('tx')">×</button>
     </div>
     <div class="type-toggle">
-      <button class="type-btn active-expense" id="type-expense" onclick="setTxType('expense')">Expense</button>
-      <button class="type-btn" id="type-income" onclick="setTxType('income')">Income</button>
+      <button class="type-btn active-expense" id="type-expense" onclick="setTxType('expense')" data-t="expense">Expense</button>
+      <button class="type-btn" id="type-income" onclick="setTxType('income')" data-t="income">Income</button>
     </div>
     <div class="modal-field">
-      <label>Description</label>
-      <input type="text" id="tx-desc" placeholder="e.g. Groceries" />
+      <label data-t="description">Description</label>
+      <input type="text" id="tx-desc" data-t-placeholder="description" placeholder="e.g. Groceries" />
     </div>
     <div class="modal-field">
-      <label>Amount ($)</label>
+      <label data-t="amount">Amount</label>
       <input type="number" id="tx-amount" placeholder="0.00" min="0" step="0.01" />
     </div>
     <div class="modal-field">
-      <label>Category</label>
-      <select id="tx-cat">
-        <option>🍔 Food</option><option>🚌 Transport</option><option>🏠 Housing</option>
-        <option>🎬 Entertainment</option><option>💊 Health</option><option>🛍️ Shopping</option>
-        <option>⚡ Utilities</option><option>💼 Salary</option><option>📦 Other</option>
-      </select>
+      <label data-t="category">Category</label>
+      <select id="tx-cat"></select>
     </div>
     <div class="modal-field">
-      <label>Visibility</label>
+      <label data-t="visibility">Visibility</label>
       <select id="tx-visibility">
-        <option value="family">Family (shared)</option>
-        <option value="private">Private (only me)</option>
+        <option value="family" data-t="familyShared">Family (shared)</option>
+        <option value="private" data-t="privateOnly">Private (only me)</option>
       </select>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('tx')">Cancel</button>
-      <button class="btn btn-primary" onclick="submitTransaction()">Add Transaction</button>
+      <button class="btn btn-ghost" onclick="closeModal('tx')" data-t="cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="submitTransaction()" data-t="addTx">Add Transaction</button>
     </div>
   </div>
 </div>
@@ -332,50 +302,50 @@
 <div class="modal-overlay" id="modal-goal" style="display:none" onclick="if(event.target===this)closeModal('goal')">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">New Savings Goal</span>
+      <span class="modal-title" data-t="newGoalTitle">New Savings Goal</span>
       <button class="modal-close" onclick="closeModal('goal')">×</button>
     </div>
     <div class="modal-field">
-      <label>Goal name</label>
-      <input type="text" id="goal-name-input" placeholder="e.g. Family Vacation" />
+      <label data-t="goalName">Goal name</label>
+      <input type="text" id="goal-name-input" data-t-placeholder="goalNamePh" placeholder="e.g. Family Vacation" />
     </div>
     <div class="modal-field">
-      <label>Target amount ($)</label>
+      <label data-t="targetAmount">Target amount</label>
       <input type="number" id="goal-target-input" placeholder="5000" min="1" />
     </div>
     <div class="modal-field">
-      <label>Initial contribution ($)</label>
+      <label data-t="initialContrib">Initial contribution</label>
       <input type="number" id="goal-initial-input" placeholder="0" min="0" />
     </div>
     <div class="modal-field">
-      <label>Goal type</label>
+      <label data-t="goalType">Goal type</label>
       <select id="goal-type-input">
-        <option value="family">Family goal (everyone contributes)</option>
-        <option value="personal">Personal goal</option>
+        <option value="family" data-t="familyGoalOpt">Family goal (everyone contributes)</option>
+        <option value="personal" data-t="personalGoalOpt">Personal goal</option>
       </select>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('goal')">Cancel</button>
-      <button class="btn btn-primary" onclick="submitGoal()">Create Goal</button>
+      <button class="btn btn-ghost" onclick="closeModal('goal')" data-t="cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="submitGoal()" data-t="createGoal">Create Goal</button>
     </div>
   </div>
 </div>
 
-<!-- ── MODAL: Contribute to Goal ── -->
+<!-- ── MODAL: Contribute ── -->
 <div class="modal-overlay" id="modal-contribute" style="display:none" onclick="if(event.target===this)closeModal('contribute')">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">Contribute to Goal</span>
+      <span class="modal-title" data-t="contributeGoal">Contribute to Goal</span>
       <button class="modal-close" onclick="closeModal('contribute')">×</button>
     </div>
-    <div id="contribute-goal-name" style="font-size:15px;font-weight:500;margin-bottom:1rem;color:#6b7280"></div>
+    <div id="contribute-goal-name" style="font-size:15px;font-weight:500;margin-bottom:1rem;color:var(--text-muted)"></div>
     <div class="modal-field">
-      <label>Amount to contribute ($)</label>
+      <label data-t="amount">Amount to contribute</label>
       <input type="number" id="contribute-amount" placeholder="100" min="1" />
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('contribute')">Cancel</button>
-      <button class="btn btn-success" onclick="submitContribution()">Contribute</button>
+      <button class="btn btn-ghost" onclick="closeModal('contribute')" data-t="cancel">Cancel</button>
+      <button class="btn btn-success" onclick="submitContribution()" data-t="contribute">Contribute</button>
     </div>
   </div>
 </div>
@@ -384,18 +354,16 @@
 <div class="modal-overlay" id="modal-invite" style="display:none" onclick="if(event.target===this)closeModal('invite')">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">Invite Family Members</span>
+      <span class="modal-title" data-t="inviteMembers">Invite Family Members</span>
       <button class="modal-close" onclick="closeModal('invite')">×</button>
     </div>
     <div class="invite-box">
-      <div style="font-size:13px;color:#6b7280">Your family invite code</div>
+      <div style="font-size:13px;color:var(--text-muted)" data-t="shareCode">Share this code with family</div>
       <div class="invite-code" id="modal-invite-code">——</div>
-      <div class="invite-hint">Share this code with family members when they sign up</div>
-      <button class="copy-btn" onclick="copyInviteCode()">Copy Code</button>
+      <button class="copy-btn" onclick="copyInviteCode()" data-t="copyCode">Copy Code</button>
     </div>
-    <div style="font-size:13px;color:#6b7280;line-height:1.6">
-      New members choose <strong>Join Family</strong> on the sign-up page and enter this code.
-      You can change their role from the Settings page after they join.
+    <div style="font-size:13px;color:var(--text-muted);line-height:1.6">
+      New members choose <strong>Join Family</strong> on sign-up and enter this code.
     </div>
   </div>
 </div>
@@ -407,9 +375,9 @@
       <span class="modal-title">Change Member Role</span>
       <button class="modal-close" onclick="closeModal('role')">×</button>
     </div>
-    <div id="change-role-name" style="font-size:15px;margin-bottom:1rem;color:#6b7280"></div>
+    <div id="change-role-name" style="font-size:15px;margin-bottom:1rem;color:var(--text-muted)"></div>
     <div class="modal-field">
-      <label>Role</label>
+      <label data-t="role">Role</label>
       <select id="new-role-select">
         <option value="parent">Parent (manage members, see all)</option>
         <option value="child">Child (add only, cannot delete)</option>
@@ -417,8 +385,8 @@
       </select>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal('role')">Cancel</button>
-      <button class="btn btn-primary" onclick="submitRoleChange()">Save Role</button>
+      <button class="btn btn-ghost" onclick="closeModal('role')" data-t="cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="submitRoleChange()" data-t="save">Save Role</button>
     </div>
   </div>
 </div>
