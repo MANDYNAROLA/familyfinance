@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FamilyFinance — Smart Family Money Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div class="bg-pattern"></div>
+
+  <div class="auth-container">
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="8" fill="#1a56db"/>
+          <path d="M6 20 Q14 8 22 20" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="14" cy="10" r="2.5" fill="white"/>
+          <circle cx="7" cy="19" r="2" fill="white" opacity="0.7"/>
+          <circle cx="21" cy="19" r="2" fill="white" opacity="0.7"/>
+        </svg>
+      </div>
+      <span class="brand-name">FamilyFinance</span>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="showTab('login')">Sign In</button>
+      <button class="auth-tab" id="tab-signup" onclick="showTab('signup')">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="form-login" class="auth-form">
+      <div class="form-header">
+        <h1>Welcome back</h1>
+        <p>Sign in to your family account</p>
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" id="login-email" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" />
+      </div>
+      <div id="login-error" class="error-msg" style="display:none"></div>
+      <button class="btn-primary" onclick="handleLogin()">
+        <span id="login-btn-text">Sign In</span>
+        <div id="login-spinner" class="spinner" style="display:none"></div>
+      </button>
+      <div class="divider"><span>or</span></div>
+      <button class="btn-google" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/><path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.039l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/></svg>
+        Continue with Google
+      </button>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="form-signup" class="auth-form" style="display:none">
+      <div class="form-header">
+        <h1>Create your family</h1>
+        <p>Start managing finances together</p>
+      </div>
+
+      <!-- Role selector -->
+      <div class="role-selector">
+        <div class="role-option active" id="role-admin" onclick="selectRole('admin')">
+          <div class="role-icon">👑</div>
+          <div class="role-label">Family Admin</div>
+          <div class="role-desc">Create & manage the family</div>
+        </div>
+        <div class="role-option" id="role-join" onclick="selectRole('join')">
+          <div class="role-icon">🔗</div>
+          <div class="role-label">Join Family</div>
+          <div class="role-desc">Use an invite code</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Full name</label>
+        <input type="text" id="signup-name" placeholder="Your name" />
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" id="signup-email" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="signup-password" placeholder="Min 6 characters" />
+      </div>
+      <div id="family-name-field" class="field">
+        <label>Family name</label>
+        <input type="text" id="signup-family" placeholder="e.g. The Smiths" />
+      </div>
+      <div id="invite-code-field" class="field" style="display:none">
+        <label>Invite code</label>
+        <input type="text" id="signup-invite" placeholder="Enter code from family admin" />
+      </div>
+      <div id="signup-error" class="error-msg" style="display:none"></div>
+      <button class="btn-primary" onclick="handleSignup()">
+        <span id="signup-btn-text">Create Account</span>
+        <div id="signup-spinner" class="spinner" style="display:none"></div>
+      </button>
+    </div>
+
+    <p class="footer-note">Your data is private, encrypted, and never sold.</p>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getDatabase, ref, set, get, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEkQGmMb5u6NiMASd3an4BoX5BYI2EYZo",
+      authDomain: "finacialdashboard-ff730.firebaseapp.com",
+      databaseURL: "https://finacialdashboard-ff730-default-rtdb.firebaseio.com",
+      projectId: "finacialdashboard-ff730",
+      storageBucket: "finacialdashboard-ff730.firebasestorage.app",
+      messagingSenderId: "798530658376",
+      appId: "1:798530658376:web:bef63d32fdf3d1347ff87d"
+    };
+    // ─────────────────────────────────────────────────────────────
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // Redirect if already logged in
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const snap = await get(ref(db, `users/${user.uid}`));
+        if (snap.exists()) window.location.href = 'dashboard.html';
+      }
+    });
+
+    let selectedRole = 'admin';
+    window.selectRole = (role) => {
+      selectedRole = role;
+      document.getElementById('role-admin').classList.toggle('active', role === 'admin');
+      document.getElementById('role-join').classList.toggle('active', role === 'join');
+      document.getElementById('family-name-field').style.display = role === 'admin' ? '' : 'none';
+      document.getElementById('invite-code-field').style.display = role === 'join' ? '' : 'none';
+    };
+
+    window.showTab = (tab) => {
+      document.getElementById('form-login').style.display = tab === 'login' ? '' : 'none';
+      document.getElementById('form-signup').style.display = tab === 'signup' ? '' : 'none';
+      document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+      document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+    };
+
+    function setLoading(form, on) {
+      document.getElementById(`${form}-btn-text`).style.opacity = on ? '0' : '1';
+      document.getElementById(`${form}-spinner`).style.display = on ? 'block' : 'none';
+    }
+
+    function showError(form, msg) {
+      const el = document.getElementById(`${form}-error`);
+      el.textContent = msg; el.style.display = 'block';
+    }
+
+    window.handleLogin = async () => {
+      const email = document.getElementById('login-email').value.trim();
+      const pass = document.getElementById('login-password').value;
+      if (!email || !pass) return showError('login', 'Please fill in all fields.');
+      setLoading('login', true);
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        window.location.href = 'dashboard.html';
+      } catch(e) {
+        setLoading('login', false);
+        showError('login', 'Invalid email or password.');
+      }
+    };
+
+    window.handleGoogleLogin = async () => {
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const snap = await get(ref(db, `users/${user.uid}`));
+        if (!snap.exists()) {
+          const familyId = push(ref(db, 'families')).key;
+          await set(ref(db, `families/${familyId}`), { name: `${user.displayName}'s Family`, adminUid: user.uid, createdAt: Date.now(), inviteCode: familyId.slice(-6).toUpperCase() });
+          await set(ref(db, `users/${user.uid}`), { name: user.displayName, email: user.email, role: 'admin', familyId, joinedAt: Date.now() });
+        }
+        window.location.href = 'dashboard.html';
+      } catch(e) { showError('login', 'Google sign-in failed.'); }
+    };
+
+    window.handleSignup = async () => {
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const pass = document.getElementById('signup-password').value;
+      if (!name || !email || !pass) return showError('signup', 'Please fill in all fields.');
+      if (pass.length < 6) return showError('signup', 'Password must be at least 6 characters.');
+      setLoading('signup', true);
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(cred.user, { displayName: name });
+        const uid = cred.user.uid;
+
+        if (selectedRole === 'admin') {
+          const familyName = document.getElementById('signup-family').value.trim() || `${name}'s Family`;
+          const familyId = push(ref(db, 'families')).key;
+          const inviteCode = familyId.slice(-6).toUpperCase();
+          await set(ref(db, `families/${familyId}`), { name: familyName, adminUid: uid, createdAt: Date.now(), inviteCode });
+          await set(ref(db, `users/${uid}`), { name, email, role: 'admin', familyId, joinedAt: Date.now() });
+        } else {
+          const code = document.getElementById('signup-invite').value.trim().toUpperCase();
+          const famSnap = await get(ref(db, 'families'));
+          let foundFamilyId = null;
+          famSnap.forEach(child => { if (child.val().inviteCode === code) foundFamilyId = child.key; });
+          if (!foundFamilyId) { setLoading('signup', false); return showError('signup', 'Invalid invite code.'); }
+          await set(ref(db, `users/${uid}`), { name, email, role: 'child', familyId: foundFamilyId, joinedAt: Date.now() });
+        }
+        window.location.href = 'dashboard.html';
+      } catch(e) {
+        setLoading('signup', false);
+        showError('signup', e.code === 'auth/email-already-in-use' ? 'Email already in use.' : 'Signup failed. Try again.');
+      }
+    };
+  </script>
+</body>
+</html>
