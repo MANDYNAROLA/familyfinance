@@ -55,6 +55,10 @@
       <button class="btn btn-ghost mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
       <span class="topbar-title" id="topbar-title">Overview</span>
       <div class="topbar-actions">
+        <!-- Quick language switcher -->
+        <select id="topbar-lang" onchange="setLanguage(this.value)" title="Language" style="padding:5px 8px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--card-bg);color:var(--text);cursor:pointer;max-width:110px"></select>
+        <!-- Quick currency switcher -->
+        <select id="topbar-currency" onchange="setCurrency(this.value)" title="Currency" style="padding:5px 8px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--card-bg);color:var(--text);cursor:pointer;max-width:90px"></select>
         <button class="btn btn-primary" id="add-tx-btn" onclick="openModal('tx')" style="display:none" data-t="addTransaction">+ Add Transaction</button>
       </div>
     </header>
